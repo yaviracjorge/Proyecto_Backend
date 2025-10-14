@@ -3,7 +3,7 @@ package com.proyecto.backend.app.backend_app.model.entities;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.Timer;
+
 
 @Entity
 
