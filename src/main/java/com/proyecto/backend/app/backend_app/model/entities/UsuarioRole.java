@@ -15,11 +15,22 @@ public class UsuarioRole {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "UsuarioId")//nombre de la columna en esta tabla
-    private Usuario usuario;
+    private Long idUsuario;
+    private Long idRole;
 
-    @ManyToOne
-    @JoinColumn(name = "RolId")
-    private Rol rol;
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Long getIdRole() {
+        return idRole;
+    }
+
+    public void setIdRole(Long idRole) {
+        this.idRole = idRole;
+    }
 }

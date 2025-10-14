@@ -11,18 +11,28 @@ public class Cita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+
     @Temporal(TemporalType.DATE)
     private Date Fecha;
     @Temporal(TemporalType.TIME)
     private Date Hora;
 
-    @ManyToOne
-    @JoinColumn(name = "PerfilPacienteId")
-    private PerfilPaciente PerfilPaciente;
+    public Date getFecha() {
+        return Fecha;
+    }
 
-    @ManyToOne
-    @JoinColumn(name = "PerfilClinicaId")
-    private PerfilClinica PerfilClinica;
+    public void setFecha(Date fecha) {
+        Fecha = fecha;
+    }
+
+    public Date getHora() {
+        return Hora;
+    }
+
+    public void setHora(Date hora) {
+        Hora = hora;
+    }
+
 
 
 }
