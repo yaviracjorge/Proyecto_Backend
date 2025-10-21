@@ -2,19 +2,39 @@ package com.proyecto.backend.app.backend_app.servicies;
 
 import com.proyecto.backend.app.backend_app.model.entities.Usuario;
 import com.proyecto.backend.app.backend_app.repositories.UsuarioRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
     @Override
-    @Transactional
+    @Transactional (readOnly = true)
     public List<Usuario>findAll() {
         return (List<Usuario>)usuarioRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Usuario> findById(Long id) {
+        return usuarioRepository.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public Usuario save(Usuario user) {
+        return usuarioRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        usuarioRepository.deleteById(id);
+
     }
 }
