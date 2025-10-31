@@ -6,6 +6,7 @@ import com.proyecto.backend.app.backend_app.servicies.UsuarioService;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -38,9 +39,11 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public Usuario save(@Valid @RequestBody Usuario usuario, BindingResult result ) {
-        
-        return usuarioService.save(usuario);
+    public ResponseEntity<?> save(@Valid @RequestBody Usuario usuario, BindingResult result) {
+        if (result.hasErrors()) {
+            return validation(result);
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(usuario));
     }
 
     @PutMapping("/{id}")
@@ -67,7 +70,7 @@ public class UsuarioController {
     private ResponseEntity<?> validation(BindingResult result) {
         Map<String, String> errors = new HashMap<>();
         result.getFieldErrors().forEach(err -> {
-            errors.put(err.getField(), "El campo " + err.getField() + " contiene errores" + err.getDefaultMessage());
+            errors.put(err.getField(), "El campo " + err.getField() + " contiene errores " + err.getDefaultMessage());
         });
         return ResponseEntity.badRequest().body(errors);
     }
