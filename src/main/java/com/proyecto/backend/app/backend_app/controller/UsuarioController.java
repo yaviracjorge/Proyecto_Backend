@@ -44,7 +44,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@Valid @PathVariable Long id, @RequestBody Usuario usuario, BindingResult result) {
+    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody Usuario usuario, BindingResult result) {
         if (result.hasErrors()) {
             return validation(result);
         }
@@ -59,6 +59,10 @@ public class UsuarioController {
     public void deleteById(@PathVariable Long id) {
         usuarioService.deleteById(id);
     }
+
+
+
+
 
     private ResponseEntity<?> validation(BindingResult result) {
         Map<String, String> errors = new HashMap<>();
